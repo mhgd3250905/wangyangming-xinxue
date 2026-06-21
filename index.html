@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-<nav><span class="site-name">知 行</span><a href="articles/">其他文章 →</a></nav>
+<nav><span class="site-name">知 行</span><div style="display:flex;gap:16px;"><button onclick="share()" style="background:none;border:none;color:#8b7355;cursor:pointer;font-size:15px;">分享</button><a href="articles/">其他文章 →</a></div></nav>
 <article>
 
 <h1>王阳明心学：你心里本来就有答案，<br>你只是不敢信它</h1>
@@ -124,5 +124,8 @@
 <span class="ref">参考：王阳明《传习录》、钱穆《阳明学述要》、陈来《有无之境——王阳明哲学的精神》</span>
 
 </article>
+<script>
+function share(){var u=location.href,t=document.title;if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else{navigator.clipboard.writeText(u);alert('链接已复制，去微信粘贴吧')}}
+</script>
 </body>
 </html>

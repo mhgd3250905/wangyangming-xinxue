@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-<nav><span class="site-name">知 行</span><a href="index.html">← 文章列表</a></nav>
+<nav><span class="site-name">知 行</span><div style="display:flex;gap:16px;"><button onclick="share()" style="background:none;border:none;color:#8b7355;cursor:pointer;font-size:15px;">分享</button><a href="index.html">← 文章列表</a></div></nav>
 <article>
 
 <h1>张无忌：我不想让别人因为我而痛</h1>
@@ -87,5 +87,8 @@
 <p>江南的春天很长，路上的雨落得很慢。身后是天下，面前是路。没有人叫他的全名了。</p>
 
 </article>
+<script>
+function share(){var u=location.href,t=document.title;if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else{navigator.clipboard.writeText(u);alert('链接已复制，去微信粘贴吧')}}
+</script>
 </body>
 </html>
