@@ -41,8 +41,8 @@
 <script>
 // ponytail: inline article listing, add when more than 20 articles
 const articles = [
-  { title:'张无忌：我不想让别人因为我而痛', desc:'一个人武功天下第一，却不把「天下第一」当成一件需要证明的事——这大概才是金庸笔下最奢侈的自由。', author:'阿开', date:'2025-03', href:'zhangwuji.html' },
-  { title:'王阳明心学：你心里本来就有答案，你只是不敢信它', desc:'知行合一、致良知——五百年前一个躺在石棺里的人说：你自己心里，就是标准。', author:'阿开', date:'2025-02', href:'../' }
+  { title:'张无忌：我不想让别人因为我而痛', desc:'一个人武功天下第一，却不把「天下第一」当成一件需要证明的事——这大概才是金庸笔下最奢侈的自由。', author:'阿开', date:'2026-06-21', href:'zhangwuji.html' },
+  { title:'王阳明心学：你心里本来就有答案，你只是不敢信它', desc:'知行合一、致良知——五百年前一个躺在石棺里的人说：你自己心里，就是标准。', author:'阿开', date:'2026-06-21', href:'../' }
 ];
 var list=document.getElementById('list'),empty=document.getElementById('empty');
 if(articles.length>0){empty.style.display='none';articles.forEach(function(a){var d=document.createElement('div');d.className='card';d.innerHTML='<a href="'+a.href+'" style="text-decoration:none;color:inherit;"><div class="card-title">'+a.title+'</div><div class="card-desc">'+a.desc+'</div></a><div class="card-meta"><span>'+a.author+'</span><span>·</span><span>'+a.date+'</span></div><button class="share-btn" data-href="'+a.href+'" data-title="'+a.title+'" title="分享">↗</button>';list.appendChild(d);});
