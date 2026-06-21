@@ -15,10 +15,15 @@
   .page-header { text-align:center; margin-bottom:48px; }
   .page-header h1 { font-size:22px; font-weight:700; letter-spacing:2px; }
   .page-header .sub { font-size:14px; color:#b8a99a; margin-top:8px; }
-  .card { display:block; background:#fff; border-radius:12px; padding:28px 32px; margin-bottom:16px; text-decoration:none; color:#2c2c2c; box-shadow:0 1px 4px rgba(0,0,0,.04); transition:transform .2s,box-shadow .2s; }
+  .card { display:block; background:#fff; border-radius:12px; padding:24px 32px; margin-bottom:16px; text-decoration:none; color:#2c2c2c; box-shadow:0 1px 4px rgba(0,0,0,.04); transition:transform .2s,box-shadow .2s; position:relative; }
   .card:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,.08); }
-  .card .card-title { font-size:18px; font-weight:700; margin-bottom:8px; line-height:1.5; }
-  .card .card-desc { font-size:14px; color:#999; line-height:1.7; }
+  .card .card-title { font-size:18px; font-weight:700; margin-bottom:6px; line-height:1.5; padding-right:36px; }
+  .card .card-desc { font-size:14px; color:#999; line-height:1.7; margin-bottom:10px; }
+  .card .card-meta { font-size:13px; color:#c4bdb2; display:flex; gap:16px; align-items:center; }
+  .card .share-btn { position:absolute; right:24px; top:24px; background:none; border:none; cursor:pointer; color:#ccc; font-size:18px; padding:4px 8px; border-radius:6px; transition:color .2s,background .2s; }
+  .card .share-btn:hover { color:#8b7355; background:#f5f0ea; }
+  .toast { position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#2c2c2c; color:#fff; padding:10px 24px; border-radius:20px; font-size:14px; z-index:99; opacity:0; transition:opacity .3s; pointer-events:none; }
+  .toast.show { opacity:1; }
   .empty { text-align:center; color:#ccc; padding:60px 0; font-size:15px; }
   @media(max-width:480px) { .container{padding:30px 16px 80px} .card{padding:20px 20px} }
 </style>
@@ -36,11 +41,18 @@
 <script>
 // ponytail: inline article listing, add when more than 20 articles
 const articles = [
-  { title:'张无忌：我不想让别人因为我而痛', desc:'一个人武功天下第一，却不把「天下第一」当成一件需要证明的事——这大概才是金庸笔下最奢侈的自由。', href:'zhangwuji.html' },
-  { title:'王阳明心学：你心里本来就有答案，你只是不敢信它', desc:'知行合一、致良知——五百年前一个躺在石棺里的人说：你自己心里，就是标准。', href:'../' }
+  { title:'张无忌：我不想让别人因为我而痛', desc:'一个人武功天下第一，却不把「天下第一」当成一件需要证明的事——这大概才是金庸笔下最奢侈的自由。', author:'暖胃', date:'2025-03', href:'zhangwuji.html' },
+  { title:'王阳明心学：你心里本来就有答案，你只是不敢信它', desc:'知行合一、致良知——五百年前一个躺在石棺里的人说：你自己心里，就是标准。', author:'暖胃', date:'2025-02', href:'../' }
 ];
 var list=document.getElementById('list'),empty=document.getElementById('empty');
-if(articles.length>0){empty.style.display='none';articles.forEach(function(a){var d=document.createElement('a');d.className='card';d.href=a.href;d.innerHTML='<div class="card-title">'+a.title+'</div><div class="card-desc">'+a.desc+'</div>';list.appendChild(d);})}
+if(articles.length>0){empty.style.display='none';articles.forEach(function(a){var d=document.createElement('div');d.className='card';d.innerHTML='<a href="'+a.href+'" style="text-decoration:none;color:inherit;"><div class="card-title">'+a.title+'</div><div class="card-desc">'+a.desc+'</div></a><div class="card-meta"><span>'+a.author+'</span><span>·</span><span>'+a.date+'</span></div><button class="share-btn" data-href="'+a.href+'" data-title="'+a.title+'" title="分享">↗</button>';list.appendChild(d);});
+// share button
+var abs=location.protocol+'//'+location.host+'/';
+document.querySelectorAll('.share-btn').forEach(function(b){b.onclick=function(e){e.stopPropagation();var url=abs+this.dataset.href.replace('../',''),title=this.dataset.title;if(navigator.share){navigator.share({title:title,url:url}).catch(function(){})}else{navigator.clipboard.writeText(url).then(function(){showToast('链接已复制，去微信粘贴吧')})}}});
+}
+// toast
+var toast=document.createElement('div');toast.className='toast';document.body.appendChild(toast);
+function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},2000)}
 </script>
 </body>
 </html>
