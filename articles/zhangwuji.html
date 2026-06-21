@@ -9,8 +9,11 @@
   body { font-family:"Noto Serif SC","Source Han Serif SC","STSong","SimSun","Songti SC",serif; background:#faf8f5; color:#2c2c2c; line-height:2; font-size:18px; }
   nav { max-width:720px; margin:0 auto; padding:28px 24px 0; display:flex; justify-content:space-between; align-items:center; }
   nav .site-name { font-size:16px; font-weight:700; color:#b8a99a; letter-spacing:2px; }
-  nav a { color:#8b7355; text-decoration:none; font-size:15px; border-bottom:1px solid transparent; transition:border-color .2s; }
-  nav a:hover { border-color:#8b7355; }
+  nav a, nav button { color:#8b7355; text-decoration:none; font-size:15px; border-bottom:1px solid transparent; transition:border-color .2s; background:none; cursor:pointer; border:0; font-family:inherit; }
+  nav a:hover, nav button:hover { border-color:#8b7355; }
+  .controls { display:flex; gap:4px; align-items:center; }
+  .controls select { padding:2px 6px; border:1px solid #d4cfc8; border-radius:6px; background:#faf8f5; color:#8b7355; font-size:13px; font-family:inherit; cursor:pointer; }
+  .controls select:focus { outline:none; border-color:#8b7355; }
   article { max-width:720px; margin:0 auto; padding:30px 24px 80px; }
   h1 { font-size:28px; font-weight:700; text-align:center; margin-bottom:8px; line-height:1.4; }
   hr { border:none; border-top:1px solid #d4cfc8; margin:24px 0 48px; }
@@ -18,31 +21,28 @@
   p { margin:20px 0; text-align:justify; }
   strong { font-weight:700; }
   @media(max-width:480px) { body{font-size:16px} article{padding:30px 16px 80px} }
-  .petals { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
-  .petal { position:absolute; top:-40px; opacity:0.5; animation:fall linear infinite; }
-  .petal:nth-child(1){ left:5%; animation-duration:12s; animation-delay:0s; font-size:16px; }
-  .petal:nth-child(2){ left:15%; animation-duration:14s; animation-delay:2s; font-size:12px; }
-  .petal:nth-child(3){ left:25%; animation-duration:11s; animation-delay:4s; font-size:18px; }
-  .petal:nth-child(4){ left:35%; animation-duration:15s; animation-delay:1s; font-size:10px; }
-  .petal:nth-child(5){ left:45%; animation-duration:13s; animation-delay:5s; font-size:14px; }
-  .petal:nth-child(6){ left:55%; animation-duration:10s; animation-delay:3s; font-size:20px; }
-  .petal:nth-child(7){ left:65%; animation-duration:16s; animation-delay:6s; font-size:11px; }
-  .petal:nth-child(8){ left:75%; animation-duration:12s; animation-delay:7s; font-size:15px; }
-  .petal:nth-child(9){ left:85%; animation-duration:14s; animation-delay:2.5s; font-size:13px; }
-  .petal:nth-child(10){ left:92%; animation-duration:11s; animation-delay:8s; font-size:17px; }
-  @keyframes fall {
-    0% { transform:translateY(-40px) rotate(0deg) translateX(0); }
-    25% { transform:translateY(25vh) rotate(90deg) translateX(30px); }
-    50% { transform:translateY(50vh) rotate(180deg) translateX(-20px); }
-    75% { transform:translateY(75vh) rotate(270deg) translateX(25px); }
-    100% { transform:translateY(105vh) rotate(360deg) translateX(-10px); }
-  }
-  nav, article { position:relative; z-index:1; }
 </style>
 </head>
 <body>
-<div class="petals"><span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🍃</span><span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🌸</span><span class="petal">🍃</span><span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🍃</span></div>
-<nav><span class="site-name">知 行</span><div style="display:flex;gap:16px;"><button onclick="share()" style="background:none;border:none;color:#8b7355;cursor:pointer;font-size:15px;">分享</button><a href="index.html">← 文章列表</a></div></nav>
+<nav>
+  <span class="site-name">知 行</span>
+  <div style="display:flex;gap:16px;align-items:center;">
+    <div class="controls">
+      <select id="fontSize" onchange="applyStyle()">
+        <option value="16">小</option>
+        <option value="18" selected>中</option>
+        <option value="20">大</option>
+      </select>
+      <select id="fontWeight" onchange="applyStyle()">
+        <option value="300">细</option>
+        <option value="400" selected>中</option>
+        <option value="500">粗</option>
+      </select>
+    </div>
+    <button onclick="share()">分享</button>
+    <a href="index.html">← 文章列表</a>
+  </div>
+</nav>
 <article>
 
 <h1>张无忌：我不想让别人因为我而痛</h1>
@@ -109,6 +109,8 @@
 
 </article>
 <script>
+(function(){var s=localStorage.getItem('fontSize');if(s)document.getElementById('fontSize').value=s;var w=localStorage.getItem('fontWeight');if(w)document.getElementById('fontWeight').value=w;applyStyle()})();
+function applyStyle(){var s=document.getElementById('fontSize').value,w=document.getElementById('fontWeight').value;document.body.style.fontSize=s+'px';document.body.style.fontWeight=w;localStorage.setItem('fontSize',s);localStorage.setItem('fontWeight',w)}
 function share(){var u=location.href,t=document.title;if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else{navigator.clipboard.writeText(u);alert('链接已复制，去微信粘贴吧')}}
 </script>
 </body>
