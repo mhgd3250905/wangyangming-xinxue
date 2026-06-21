@@ -26,9 +26,30 @@
   .toast.show { opacity:1; }
   .empty { text-align:center; color:#ccc; padding:60px 0; font-size:15px; }
   @media(max-width:480px) { .container{padding:30px 16px 80px} .card{padding:20px 20px} }
+  .petals { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+  .petal { position:absolute; top:-40px; opacity:0.5; animation:fall linear infinite; }
+  .petal:nth-child(1){ left:5%; animation-duration:12s; animation-delay:0s; font-size:16px; }
+  .petal:nth-child(2){ left:15%; animation-duration:14s; animation-delay:2s; font-size:12px; }
+  .petal:nth-child(3){ left:25%; animation-duration:11s; animation-delay:4s; font-size:18px; }
+  .petal:nth-child(4){ left:35%; animation-duration:15s; animation-delay:1s; font-size:10px; }
+  .petal:nth-child(5){ left:45%; animation-duration:13s; animation-delay:5s; font-size:14px; }
+  .petal:nth-child(6){ left:55%; animation-duration:10s; animation-delay:3s; font-size:20px; }
+  .petal:nth-child(7){ left:65%; animation-duration:16s; animation-delay:6s; font-size:11px; }
+  .petal:nth-child(8){ left:75%; animation-duration:12s; animation-delay:7s; font-size:15px; }
+  .petal:nth-child(9){ left:85%; animation-duration:14s; animation-delay:2.5s; font-size:13px; }
+  .petal:nth-child(10){ left:92%; animation-duration:11s; animation-delay:8s; font-size:17px; }
+  @keyframes fall {
+    0% { transform:translateY(-40px) rotate(0deg) translateX(0); }
+    25% { transform:translateY(25vh) rotate(90deg) translateX(30px); }
+    50% { transform:translateY(50vh) rotate(180deg) translateX(-20px); }
+    75% { transform:translateY(75vh) rotate(270deg) translateX(25px); }
+    100% { transform:translateY(105vh) rotate(360deg) translateX(-10px); }
+  }
+  nav, .container { position:relative; z-index:1; }
 </style>
 </head>
 <body>
+<div class="petals"><span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🍃</span><span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🌸</span><span class="petal">🍃</span><span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🍃</span></div>
 <nav><span class="site-name">知 行</span><a href="../">← 首页</a></nav>
 <div class="container">
 <div class="page-header">
