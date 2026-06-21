@@ -145,7 +145,7 @@
 function applyStyle(){var s=document.getElementById('fontSize').value,w=document.getElementById('fontWeight').value;document.body.style.fontSize=s+'px';document.body.style.fontWeight=w;localStorage.setItem('fontSize',s);localStorage.setItem('fontWeight',w)}
 function share(){document.getElementById('shareUrl').textContent=location.href;document.getElementById('shade').classList.add('show')}
 function copyLink(){navigator.clipboard.writeText(location.href).then(function(){var t=document.getElementById('toast');t.textContent='\u2713 已复制，去微信粘贴吧';t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)})}
-function shareSys(){document.getElementById('shade').classList.remove('show');var d=document.querySelector('meta[property="og:description"]');navigator.share({title:document.title,text:d?d.content:'',url:location.href}).catch(function(){})}
+function shareSys(){document.getElementById('shade').classList.remove('show');var d=document.querySelector('meta[property="og:description"]');if(navigator.share){navigator.share({title:document.title,text:d?d.content:'',url:location.href}).then(function(){}).catch(function(){copyLink()})}else{copyLink()}}
 function closeShare(e){if(e.target===e.currentTarget)document.getElementById('shade').classList.remove('show')}
 </script>
 </body>
