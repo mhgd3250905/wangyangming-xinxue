@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="张无忌：我不想让别人因为我而痛">
+<meta property="og:description" content="一个人武功天下第一，却不把「天下第一」当成一件需要证明的事——这大概才是金庸笔下最奢侈的自由。">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="知行">
 <title>张无忌：我不想让别人因为我而痛</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -111,7 +115,7 @@
 <script>
 (function(){var s=localStorage.getItem('fontSize');if(s)document.getElementById('fontSize').value=s;var w=localStorage.getItem('fontWeight');if(w)document.getElementById('fontWeight').value=w;applyStyle()})();
 function applyStyle(){var s=document.getElementById('fontSize').value,w=document.getElementById('fontWeight').value;document.body.style.fontSize=s+'px';document.body.style.fontWeight=w;localStorage.setItem('fontSize',s);localStorage.setItem('fontWeight',w)}
-function share(){var u=location.href,t=document.title;if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else{navigator.clipboard.writeText(u);alert('链接已复制，去微信粘贴吧')}}
+function share(){var u=location.href,t=document.title,d=document.querySelector('meta[property="og:description"]');var desc=d?d.content:'';if(navigator.share){navigator.share({title:t,text:desc,url:u}).catch(function(){})}else{navigator.clipboard.writeText(u);alert('链接已复制，去微信粘贴吧')}}
 </script>
 </body>
 </html>
